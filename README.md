@@ -70,6 +70,6 @@ For example you can obtain plots like this (see `test.py`):
 
 # Credit
 
-All credit to Serge Stroobandt for his original version.
+All credit to Serge Stroobandt for his original version. License falls under his original GNU GPL version 3.
 
 If you have any changes or fixed, then please free to send a pull request.
