@@ -7,8 +7,9 @@ This might be useful to some for designing air-core wire inductors for RF applic
 
 # Note
 
-Note that the results obtained with this version don't always match the original (likely due to bugs in this one), and that this one is likely a bit outdated, so proceed
-with caution. Also this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire.
+Note that the results obtained with this version don't always match the original (likely due to bugs in this one), and that this one is likely a bit outdated. Also almost none of the results obtained have been validated, so proceed with caution. 
+
+Finally note this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire.
 
 # Usage
 
