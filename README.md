@@ -49,12 +49,11 @@ Tuning support is useful if you want to obtain (say) the necessary coil length f
 ```python
 from inductor import Inductor, MATERIALS
 
-L_desired = 50e-9
+L_desired = 50e-9 # design a 50 nH inductor
 params = dict(N=4, diam_former=5e-3, diam_wire=1.2e-3, f=100e6, len_coil=51e-3)
 params.update(MATERIALS['Cu, annealed'])
 
 ind = Inductor(**params)
-
 print 'Initial length = %0.3f mm -> inductance = %0.3f nH' % (ind.len_coil/1e-3, ind.analyze()['Ls_eff']/1e-9)
 
 ind.tune_parameter('len_coil', L_desired, input_range=(1e-3, 1))
