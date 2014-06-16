@@ -5,20 +5,20 @@ An unofficial Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Ro
 
 This might be useful to some for designing air-core wire inductors (or helical antennas) for RF applications.
 
-# Requirements
+## Requirements
 
 * Python 2.7 (3.x should work with minimal changes)
 * SciPy
 * NumPy
 * Matplotlib (only for plotting, can be removed with small changes)
 
-# Note
+## Note
 
 Note that the results obtained with this version don't always match the original's (likely due to bugs in this one) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since this was written. 
 
-A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. Also the temperature model is first order and only applies to the resistivity and physical dimensions of wire, not any other material properties.
+A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. Also the temperature model is first order and only applies to the resistivity and physical dimensions of wire.
 
-# Usage
+## Usage
 
 The most basic usage takes the physical dimensions, material properties and frequency of the inductor and will return a dictionary of calculated values (inductance, resonant frequency, etc.)
 
@@ -70,7 +70,7 @@ Tuned length = 10.838 mm -> inductance = 50.000 nH
 
 You can also analyze the effect of changing an arbitrary input parameter (length, temperature, frequency, etc.) on an output quantity (inductance, Q, sensitivity, etc.). 
 
-For example you can obtain plots of the Q and self resonant frequency vs. wire diameter (while fixing the inductance):
+For example you can obtain plots of the Q and self resonant frequency vs. wire diameter (while varying the length to fix the inductance):
 
 ![](http://i.imgur.com/RThvH.png)
 
@@ -81,7 +81,7 @@ Or see how it affects the temperature coefficient of the inductance:
 See `test.py`, which has some random (and probably broken!) examples.
 
 
-# Credit and license
+## Credit and license
 
 All credit to Serge Stroobandt for his original version. License falls under his original GNU GPL version 3.
 
