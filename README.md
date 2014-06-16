@@ -20,8 +20,7 @@ A notable difference is that this version requires the diameter of the coil form
 
 # Usage
 
-The most basic usage takes the physical dimentions, material properties and frequency of the inductor and will return a dictionary of calculated values (inductance,
-resonant frequency, etc.)
+The most basic usage takes the physical dimensions, material properties and frequency of the inductor and will return a dictionary of calculated values (inductance, resonant frequency, etc.)
 
 For example:
 
@@ -43,7 +42,9 @@ gives:
 {'Rs_equiv': 0.0260142920022588, 'char_impedance': 1062.8882724816337, 'Ls_equiv': 4.18213766576639e-08, 'Rs_eff': 0.03933132499704669, 'Q_eff': 82.14705604747247, 'res_freq': 1088325440.0625987, 'Q_equiv': 101.01042124023245, 'skin_depth': 2.1102261245635593e-05, 'prop_factor': 0.5173362883660613, 'Ls_eff': 5.142220706528976e-08, 'Cp_equiv': 1.1309733366263994e-09}
 ```
 
-Tuning support is useful if you want to obtain (say) the necessary length for a given inductance:
+For an explanation of these quantities see [here](http://hamwaves.com/antennas/inductance.html).
+
+Tuning support is useful if you want to obtain (say) the necessary coil length for a desired inductance:
 
 ```python
 from inductor import Inductor, MATERIALS
@@ -69,7 +70,7 @@ Tuned length = 10.838 mm -> inductance = 50.000 nH
 
 You can also analyze the effect of changing an arbitrary input parameter (length, temperature, frequency, etc.) on an output quantity (inductance, Q, sensitivity, etc.). 
 
-For example you can obtain plot of the Q and self resonant frequency vs. wire diameter (while fixing the inductance):
+For example you can obtain plots of the Q and self resonant frequency vs. wire diameter (while fixing the inductance):
 
 ![](http://i.imgur.com/RThvH.png)
 
@@ -77,7 +78,7 @@ Or see how it affects the temperature coefficient of the inductance:
 
 ![](http://i.imgur.com/y5D2L.png)
 
-(See `test.py`, which has some more random and probably broken examples!)
+See `test.py`, which has some random (and probably broken!) examples.
 
 
 # Credit and license
