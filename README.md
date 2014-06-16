@@ -5,6 +5,13 @@ An unofficial Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Ro
 
 This might be useful to some for designing air-core wire inductors for RF applications.
 
+# Requirements
+
+* Python 2.7 (3.x should work with minimal changes)
+* SciPy
+* NumPy
+* Matplotlib (only for plotting, can be removed with small changes)
+
 # Note
 
 Note that the results obtained with this version don't always match the original's (likely due to bugs in this one) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since this was written. 
