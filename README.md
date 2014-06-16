@@ -60,16 +60,16 @@ Initial length = 51.000 mm -> inductance = 94.515 nH
 Tuned length = 10.838 mm -> inductance = 50.000 nH
 ```
 
-You can also analyze the effect of changing an arbitrary input parameter (length, frequency, etc.) on an output quantity (inductance, Q, temperature sensitivity, etc.)
-
-For example you can obtain plots like this (see `test.py`):
+You can also analyze the effect of changing an arbitrary input parameter (length, frequency, etc.) on an output quantity (inductance, Q, temperature sensitivity, etc.) For example you can obtain plots like these:
 
 ![](http://i.imgur.com/RThvH.png)
 
 ![](http://i.imgur.com/y5D2L.png)
 
-# Credit
+(See `test.py`, which has some more random and probably broken examples!)
+
+# Credit and license
 
 All credit to Serge Stroobandt for his original version. License falls under his original GNU GPL version 3.
 
-If you have any changes or fixed, then please free to send a pull request.
+If you have any changes or fixes, then please free to send a pull request.
