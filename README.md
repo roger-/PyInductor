@@ -12,15 +12,15 @@ This might be useful to some for designing air-core wire inductors (or helical a
 * NumPy
 * Matplotlib (only for plotting, can be removed with small changes)
 
-## Note
+## Differences
+
+A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. The added temperature model is first order and only applies to the resistivity and physical dimensions of wire, so be wary.
 
 Note that the results obtained with this version don't always match the original's (likely due to bugs in this one) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since this was written. 
 
-A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. Also the temperature model is first order and only applies to the resistivity and physical dimensions of wire.
-
 ## Usage
 
-The most basic usage takes the physical dimensions, material properties and frequency of the inductor and will return a dictionary of calculated values (inductance, resonant frequency, etc.)
+The most basic usage takes the physical dimensions, material properties and frequency of the inductor and returns a dictionary of calculated values (inductance, resonant frequency, etc.)
 
 For example:
 
@@ -42,7 +42,7 @@ gives:
 {'Rs_equiv': 0.0260142920022588, 'char_impedance': 1062.8882724816337, 'Ls_equiv': 4.18213766576639e-08, 'Rs_eff': 0.03933132499704669, 'Q_eff': 82.14705604747247, 'res_freq': 1088325440.0625987, 'Q_equiv': 101.01042124023245, 'skin_depth': 2.1102261245635593e-05, 'prop_factor': 0.5173362883660613, 'Ls_eff': 5.142220706528976e-08, 'Cp_equiv': 1.1309733366263994e-09}
 ```
 
-For an explanation of these quantities see [here](http://hamwaves.com/antennas/inductance.html).
+For an explanation of these quantities see [here](http://hamwaves.com/antennas/inductance.html), and note in particular the difference between the effective series inducance (`Ls_eff`) and the frequency-independent equivalent inductance (`Ls_equiv`).
 
 Tuning support is useful if you want to obtain (say) the necessary coil length for a desired inductance:
 
