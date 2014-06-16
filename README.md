@@ -14,9 +14,9 @@ This might be useful to some for designing air-core wire inductors (or helical a
 
 ## Differences
 
-A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. The added temperature model is first order and only applies to the resistivity and physical dimensions of wire, so be wary.
+A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. The additional temperature model is first order and only applies to the resistivity and physical dimensions of the wire, so be wary of this limitation.
 
-Note that the results obtained with this version don't always match the original's (likely due to bugs in this one) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since this was written. 
+Note that the results obtained with this version don't always match the original's (likely due to porting bugs) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since its creation. 
 
 ## Usage
 
