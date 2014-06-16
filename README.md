@@ -1,6 +1,6 @@
 # PyInductance
 
-A Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Round Wire Coil Inductor Calculator"](http://hamwaves.com/antennas/inductance.html)
+An unofficial Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Round Wire Coil Inductor Calculator"](http://hamwaves.com/antennas/inductance.html)
 (JavaScript [here](http://hamwaves.com/antennas/inductance/inductance.js)) with a few other additions (parameter tuning, temperature effects and sensitivity analysis).
 
 This might be useful to some for designing air-core wire inductors for RF applications.
