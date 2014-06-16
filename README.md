@@ -67,13 +67,11 @@ Initial length = 51.000 mm -> inductance = 94.515 nH
 Tuned length = 10.838 mm -> inductance = 50.000 nH
 ```
 
-You can also analyze the effect of changing an arbitrary input parameter (length, temperature, frequency, etc.) on an output quantity (inductance, Q, sensitivity, etc.). 
-
-For example you can obtain plots of the Q and self resonant frequency vs. wire diameter (while varying the length to fix the inductance):
+You can also analyze the effect of changing an arbitrary input parameter (length, temperature, frequency, etc.) on an output quantity (inductance, Q, sensitivity, etc.). For example, you can obtain plots of the Q and self resonant frequency vs. wire diameter, while varying the length to fix the inductance:
 
 ![](http://i.imgur.com/RThvH.png)
 
-Or see how it affects the temperature coefficient of the inductance:
+You can also see how it affects the temperature coefficient of the inductance:
 
 ![](http://i.imgur.com/y5D2L.png)
 
