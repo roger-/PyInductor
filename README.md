@@ -9,7 +9,7 @@ This might be useful to some for designing air-core wire inductors for RF applic
 
 Note that the results obtained with this version don't always match the original's (likely due to bugs in this one) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since this was written. 
 
-Finally note this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire.
+A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. Also the temperature model is first order and only applies to the physical dimensions of wire, not any other material properties.
 
 # Usage
 
@@ -71,6 +71,7 @@ Or see how it affects the temperature coefficient of the inductance:
 ![](http://i.imgur.com/y5D2L.png)
 
 (See `test.py`, which has some more random and probably broken examples!)
+
 
 # Credit and license
 
