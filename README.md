@@ -3,7 +3,7 @@
 An unofficial Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Round Wire Coil Inductor Calculator"](http://hamwaves.com/antennas/inductance.html)
 (JavaScript [here](http://hamwaves.com/antennas/inductance/inductance.js)) with a few other additions (parameter tuning, temperature effects and sensitivity analysis).
 
-This might be useful to some for designing air-core wire inductors for RF applications.
+This might be useful to some for designing air-core wire inductors (or helical antennas) for RF applications.
 
 # Requirements
 
@@ -16,7 +16,7 @@ This might be useful to some for designing air-core wire inductors for RF applic
 
 Note that the results obtained with this version don't always match the original's (likely due to bugs in this one) and that almost nothing has been properly validated, so proceed with caution. Also this port is possibly a bit outdated since the original may have been modified since this was written. 
 
-A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. Also the temperature model is first order and only applies to the physical dimensions of wire, not any other material properties.
+A notable difference is that this version requires the diameter of the coil former (`diam_former`) instead of the diameter of the former *plus* the wire. Also the temperature model is first order and only applies to the resistivity and physical dimensions of wire, not any other material properties.
 
 # Usage
 
