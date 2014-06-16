@@ -26,7 +26,8 @@ params.update(MATERIALS['Cu, annealed'])
 ind = Inductor(**params)
 results = ind.analyze()
 
-print results```
+print results
+```
 
 gives:
 
