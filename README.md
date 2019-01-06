@@ -5,6 +5,8 @@ An unofficial Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Ro
 
 This might be useful to some for designing air-core wire inductors (or helical antennas) for RF applications.
 
+**1/2019 update**: Serge Stroobandt has ported his code from JavaScript to Brython (browser Python), so have a look.
+
 ## Requirements
 
 * Python 2.7 (3.x should work with minimal changes)
