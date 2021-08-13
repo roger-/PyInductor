@@ -11,15 +11,19 @@ warnings.filterwarnings("ignore")
 
 
 def _solver(combination):
+    """This is the core of the solver, which takes one combination of coil parameters and
+    analyzes the inductor. If the resulting phi is within the allowed tolerance, the coil
+    parameters are returned."""
+
     # extract the changing params
-    n, diam_mm, len_um, coil_parms = combination
+    n, diam_mm, len_um, coil_params = combination
     # extract the static params
     params = {'N': n,
-              'diam_former': (diam_mm + coil_parms['diam_wire_with_isol_mm']) * 1e-3,
-              'diam_wire': coil_parms['diam_wire_core_mm'] * 1e-3,
-              'f': coil_parms['frequency'],
+              'diam_former': (diam_mm + coil_params['diam_wire_with_isol_mm']) * 1e-3,
+              'diam_wire': coil_params['diam_wire_core_mm'] * 1e-3,
+              'f': coil_params['frequency'],
               'len_coil': len_um * 1e-6}
-    params.update(MATERIALS['Cu, annealed'])
+    params.update(coil_params['material'])
     try:
         ind = Inductor(**params)
         results = ind.analyze()
@@ -28,9 +32,9 @@ def _solver(combination):
 
     phi = results['prop_factor'] * len_um * 1e-6
     # if phi is within the allowed tolerance
-    if (coil_parms['phase_shift_rad'] * (
-            1 - coil_parms['phase_shift_tolerance_pct'] / 100)) < phi < (
-            coil_parms['phase_shift_rad'] * (1 + coil_parms['phase_shift_tolerance_pct'] / 100)):
+    if (coil_params['phase_shift_rad'] * (
+            1 - coil_params['phase_shift_tolerance_pct'] / 100)) < phi < (
+            coil_params['phase_shift_rad'] * (1 + coil_params['phase_shift_tolerance_pct'] / 100)):
 
         # we only want 1 wire layer for the winding, don't we?
         if ind.turn_spacing <= 0:
@@ -43,7 +47,7 @@ def _solver(combination):
 
 class PhasingCoilSolver:
     def __init__(self, phase_shift_rad, phase_shift_tolerance_pct, frequency, diam_wire_core_mm,
-                 diam_wire_with_isol_mm, N_range, diams_mm, len_range_mm, ncpus=0):
+                 diam_wire_with_isol_mm, N_range, diams_mm, len_range_mm, material, ncpus=0):
         """
         Parameters:
         phase_shift_rad (float): Phase shift we want to achieve
@@ -59,6 +63,8 @@ class PhasingCoilSolver:
                          them, rather than manufacture a pipe/tube with a specific diameter.
         len_range_mm (tuple): Range of coil lenghts for which to perform the calculations,
                               incl. step, e.g. (20, 300, 1)
+        material (str): String defining the material of wire. See PyInductor.data for what's
+                        supported.
         ncpus (int): Number of CPUs we want to utilize; if set to zero, it defaults to
                      number of available CPUs minus one which is reasonable for most cases.
         """
@@ -71,6 +77,7 @@ class PhasingCoilSolver:
         self.N_range = N_range
         self.diams_mm = diams_mm
         self.len_range_mm = len_range_mm
+        self.material = MATERIALS[material]
         if ncpus:
             self.ncpus = ncpus
         else:

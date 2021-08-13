@@ -16,6 +16,7 @@ def test_phasing_coil_solver_py2(capsys):
         N_range=(95, 99),
         diams_mm=[32],
         len_range_mm=(260, 310, 1),
+        material='Cu, annealed',
     )
     c.solve()
 
@@ -35,6 +36,7 @@ def test_phasing_coil_solver_py3(capsys):
         N_range=(95, 99),
         diams_mm=[32],
         len_range_mm=(260, 310, 1),
+        material='Cu, annealed',
     )
     c.solve()
 
