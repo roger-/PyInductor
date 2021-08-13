@@ -24,6 +24,19 @@ def _solver(combination):
               'f': coil_params['frequency'],
               'len_coil': len_um * 1e-6}
     params.update(coil_params['material'])
+
+    # do not bother with analyzing coil that doesn't meet basic criteria
+    # we only want 1 wire layer for the winding, don't we?
+    len_mm = len_um * 1e-3
+    if len_mm < coil_params['diam_wire_with_isol_mm'] * n:
+        return None
+
+    # if we have some requirements for max spacing between coil turns, let's use them
+    ts_mm = (len_mm - (coil_params['diam_wire_with_isol_mm'] * n)) / n
+    if coil_params['max_turn_spacing_mm'] and ts_mm > coil_params['max_turn_spacing_mm']:
+        return None
+
+    # calculate the coil
     try:
         ind = Inductor(**params)
         results = ind.analyze()
@@ -36,18 +49,15 @@ def _solver(combination):
             1 - coil_params['phase_shift_tolerance_pct'] / 100)) < phi < (
             coil_params['phase_shift_rad'] * (1 + coil_params['phase_shift_tolerance_pct'] / 100)):
 
-        # we only want 1 wire layer for the winding, don't we?
-        if ind.turn_spacing <= 0:
-            return None
-
-        # return coil parameters: N of threads, diameter, length and the resulting phi
-        return "N={n}, diam_mm={diam_mm}, len_mm={len_mm}, phi={phi}".format(
-            n=n, diam_mm=diam_mm, len_mm=len_um * 1e-3, phi=phi)
+        # return coil parameters: N of turns, diameter, length, phi and turn spacing
+        return "N={}, diameter_mm={}, length_mm={}, phi={}, turn_spacing_mm={}".format(
+            n, diam_mm, len_mm, phi, ts_mm)
 
 
 class PhasingCoilSolver:
     def __init__(self, phase_shift_rad, phase_shift_tolerance_pct, frequency, diam_wire_core_mm,
-                 diam_wire_with_isol_mm, N_range, diams_mm, len_range_mm, material, ncpus=0):
+                 diam_wire_with_isol_mm, N_range, diams_mm, len_range_mm, material,
+                 max_turn_spacing_mm=0, ncpus=0):
         """
         Parameters:
         phase_shift_rad (float): Phase shift we want to achieve
@@ -55,7 +65,7 @@ class PhasingCoilSolver:
         frequency (float): center frequency
         diam_wire_core_mm (float): Diameter of the wire's core
         diam_wire_with_isol_mm (float): Diameter of the wire including insulation
-        N_range (tuple): Range of coil threads for which to perform the calculations,
+        N_range (tuple): Range of coil turns for which to perform the calculations,
                          e.g. (10, 100)
         diams_mm (list): List of coil diameters, e.g. [16, 20, 25, 32, 100, 125, 1500]
                          This makes better sense than defining a range, because available
@@ -65,7 +75,9 @@ class PhasingCoilSolver:
                               incl. step, e.g. (20, 300, 1)
         material (str): String defining the material of wire. See PyInductor.data for what's
                         supported.
-        ncpus (int): Number of CPUs we want to utilize; if set to zero, it defaults to
+        max_turn_spacing_mm (float): Optional spacing limit between wires (their insulations,
+                                     to be more precise).
+        ncpus (int): Optional number of CPUs we want to utilize; if set to zero, it defaults to
                      number of available CPUs minus one which is reasonable for most cases.
         """
 
@@ -78,6 +90,7 @@ class PhasingCoilSolver:
         self.diams_mm = diams_mm
         self.len_range_mm = len_range_mm
         self.material = MATERIALS[material]
+        self.max_turn_spacing_mm = max_turn_spacing_mm
         if ncpus:
             self.ncpus = ncpus
         else:
