@@ -13,7 +13,7 @@ def test_phasing_coil_solver_py2(capsys):
         frequency=27e6,
         diam_wire_core_mm=0.4,
         diam_wire_with_isol_mm=2.7,
-        N_range=(95, 100),
+        N_range=(95, 99),
         diams_mm=[32],
         len_range_mm=(260, 310, 1),
     )
@@ -21,7 +21,7 @@ def test_phasing_coil_solver_py2(capsys):
 
     captured = capsys.readouterr()
     assert "N=95, diam_mm=32, len_mm=260.0, phi=3.12610513482" in captured.out
-    assert "N=99, diam_mm=32, len_mm=309.0, phi=3.13512433923" in captured.out
+    assert "N=99, diam_mm=32, len_mm=310.0, phi=3.13226639014" in captured.out
 
 
 @pytest.mark.skipif(sys.version_info < (3, 8), reason="requires python3.8 or higher")
@@ -32,7 +32,7 @@ def test_phasing_coil_solver_py3(capsys):
         frequency=27e6,
         diam_wire_core_mm=0.4,
         diam_wire_with_isol_mm=2.7,
-        N_range=(95, 100),
+        N_range=(95, 99),
         diams_mm=[32],
         len_range_mm=(260, 310, 1),
     )
@@ -40,4 +40,4 @@ def test_phasing_coil_solver_py3(capsys):
 
     captured = capsys.readouterr()
     assert "N=95, diam_mm=32, len_mm=260.0, phi=3.1261051348185567" in captured.out
-    assert "N=99, diam_mm=32, len_mm=309.0, phi=3.1351243392302433" in captured.out
+    assert "N=99, diam_mm=32, len_mm=310.0, phi=3.1322663901436427" in captured.out

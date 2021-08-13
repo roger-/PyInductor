@@ -54,7 +54,7 @@ class PhasingCoilSolver:
         N_range (tuple): Range of coil threads for which to perform the calculations,
                          e.g. (10, 100)
         diams_mm (list): List of coil diameters, e.g. [16, 20, 25, 32, 100, 125, 1500]
-                         This makes better sance than defining a range, because available
+                         This makes better sense than defining a range, because available
                          tubes/pipes have fixed diameter and we usually want to choose one of
                          them, rather than manufacture a pipe/tube with a specific diameter.
         len_range_mm (tuple): Range of coil lenghts for which to perform the calculations,
@@ -80,9 +80,14 @@ class PhasingCoilSolver:
 
         pool = Pool(processes=self.ncpus)
 
-        len_range_um = (int(l_mm * 1e3) for l_mm in self.len_range_mm)
+        len_range_um = [int(l_mm * 1e3) for l_mm in self.len_range_mm]
         # generate all possible combinations
-        combinations = product(range(*self.N_range), self.diams_mm, range(*len_range_um))
+        combinations = product(range(self.N_range[0],  # start value
+                                     self.N_range[1] + 1),  # end value
+                               self.diams_mm,
+                               range(len_range_um[0],  # start value
+                                     len_range_um[1] + len_range_um[2],  # incl. end value
+                                     len_range_um[2]))  # step
         # attach coil static parameters to the combinations
         combinations_with_static_params = [c + (self.__dict__,) for c in combinations]
 
