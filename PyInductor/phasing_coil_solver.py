@@ -15,25 +15,25 @@ def _solver(combination):
     analyzes the inductor. If the resulting phi is within the allowed tolerance, the coil
     parameters are returned."""
 
-    # extract the changing params
-    n, diam_mm, len_um, coil_params = combination
-    # extract the static params
+    # extract the changing and static params
+    n, diam_mm, len_um, static_params = combination
+    # prepare params for Inductor
     params = {'N': n,
-              'diam_former': (diam_mm + coil_params['diam_wire_with_isol_mm']) * 1e-3,
-              'diam_wire': coil_params['diam_wire_core_mm'] * 1e-3,
-              'f': coil_params['frequency'],
+              'diam_former': (diam_mm + static_params['diam_wire_with_isol_mm']) * 1e-3,
+              'diam_wire': static_params['diam_wire_core_mm'] * 1e-3,
+              'f': static_params['frequency'],
               'len_coil': len_um * 1e-6}
-    params.update(coil_params['material'])
+    params.update(static_params['material'])
 
     # do not bother with analyzing coil that doesn't meet basic criteria
     # we only want 1 wire layer for the winding, don't we?
     len_mm = len_um * 1e-3
-    if len_mm < coil_params['diam_wire_with_isol_mm'] * n:
+    if len_mm < static_params['diam_wire_with_isol_mm'] * n:
         return None
 
     # if we have some requirements for max spacing between coil turns, let's use them
-    ts_mm = (len_mm - (coil_params['diam_wire_with_isol_mm'] * n)) / n
-    if coil_params['max_turn_spacing_mm'] and ts_mm > coil_params['max_turn_spacing_mm']:
+    ts_mm = (len_mm - (static_params['diam_wire_with_isol_mm'] * n)) / n
+    if static_params['max_turn_spacing_mm'] and ts_mm > static_params['max_turn_spacing_mm']:
         return None
 
     # calculate the coil
@@ -44,10 +44,10 @@ def _solver(combination):
         return None
 
     phi = results['prop_factor'] * len_um * 1e-6
+    tol_pct = static_params['phase_shift_tolerance_pct']
     # if phi is within the allowed tolerance
-    if (coil_params['phase_shift_rad'] * (
-            1 - coil_params['phase_shift_tolerance_pct'] / 100)) < phi < (
-            coil_params['phase_shift_rad'] * (1 + coil_params['phase_shift_tolerance_pct'] / 100)):
+    if (static_params['phase_shift_rad'] * (1 - tol_pct / 100)) < phi < (
+            static_params['phase_shift_rad'] * (1 + tol_pct / 100)):
 
         # return coil parameters: N of turns, diameter, length, phi and turn spacing
         return "N={}, diameter_mm={}, length_mm={}, phi={}, turn_spacing_mm={}".format(
