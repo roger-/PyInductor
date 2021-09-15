@@ -5,11 +5,14 @@ An unofficial Python port of Serge Stroobandt, ON4AA's ["Single-Layer Helical Ro
 
 This might be useful to some for designing air-core wire inductors (or helical antennas) for RF applications.
 
+**8/2021 update**: Filip Valder (fivaldi on GitHub) added Python 3 support, unit tests and experimental phasing coil solver.
+
 **1/2019 update**: Serge Stroobandt has ported his code from JavaScript to Brython (browser Python), so have a look.
 
 ## Requirements
 
-* Python 2.7 (3.x should work with minimal changes)
+* Python 3.8
+* Python 2.7 (deprecated)
 * SciPy
 * NumPy
 * Matplotlib (only for plotting, can be removed with small changes)
@@ -77,8 +80,13 @@ You can also see how it affects the temperature coefficient of the inductance:
 
 ![](http://i.imgur.com/y5D2L.png)
 
-See `test.py`, which has some random (and probably broken!) examples.
+## Development and testing
 
+1. Install tox (virtualenv-based automation of test activities) and run it in the root of the repository:
+
+    ```
+    % tox
+    ```
 
 ## Credit and license
 
